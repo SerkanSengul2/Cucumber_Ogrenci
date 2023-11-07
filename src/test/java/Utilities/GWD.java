@@ -34,7 +34,7 @@ public class GWD {
             switch (threadBrowserName.get()){
                 case "firefox": threadDriver.set(new FirefoxDriver()); break;
                 case "edge":    threadDriver.set(new EdgeDriver());    break;
-                default :  threadDriver.set(new ChromeDriver());
+                default :  threadDriver.set(new FirefoxDriver());
                     options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400");
                     threadDriver.set(new ChromeDriver(options)); // ilgili threade bir driver set ettim
 

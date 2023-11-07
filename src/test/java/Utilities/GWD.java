@@ -67,8 +67,7 @@ public class GWD {
         if (threadDriver.get() != null) {
             threadDriver.get().quit();
 
-            WebDriver driver =
-                    driver = null;
+            WebDriver driver = driver = null;
 
             threadDriver.set(driver);
         }

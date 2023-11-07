@@ -15,8 +15,8 @@ import java.util.Locale;
 
 public class GWD {
 
-    private static ThreadLocal<WebDriver> threadDriver=new ThreadLocal<>();
-    public static ThreadLocal<String> threadBrowserName=new ThreadLocal<>();
+    private static ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+    public static ThreadLocal<String> threadBrowserName = new ThreadLocal<>();
 
 
     public static WebDriver getDriver() {
@@ -27,20 +27,30 @@ public class GWD {
         Locale.setDefault(new Locale("EN"));
         System.setProperty("user.language", "EN");
 
-        if (threadBrowserName.get()==null)
+        if (threadBrowserName.get() == null)
             threadBrowserName.set("chrome");
 
-        if (threadDriver.get()==null) {
+        if (threadDriver.get() == null) {
 
-            switch (threadBrowserName.get()){
-                case "firefox": threadDriver.set(new FirefoxDriver()); break;
-                case "edge":    threadDriver.set(new EdgeDriver());    break;
-                default :  threadDriver.set(new FirefoxDriver());
-                    FirefoxOptions options1=new FirefoxOptions();
-                    options1.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400");
-                    threadDriver.set(new FirefoxDriver(options1));
+            switch (threadBrowserName.get()) {
+                case "firefox":
+                    threadDriver.set(new FirefoxDriver());
+                    break;
+                case "edge":
+                    threadDriver.set(new EdgeDriver());
+                    break;
+                default:
+                    threadDriver.set(new FirefoxDriver());
+                    if (isRunningOnJenkins()) {
 
+
+                        FirefoxOptions options1 = new FirefoxOptions();
+                        options1.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400");
+                        threadDriver.set(new FirefoxDriver(options1));
+                    } else
+                        threadDriver.set(new ChromeDriver());
             }
+
         }
 
         threadDriver.get().manage().window().maximize();
@@ -57,15 +67,19 @@ public class GWD {
         }
 
         //driver kapat
-        if (threadDriver.get()!=null) {
+        if (threadDriver.get() != null) {
             threadDriver.get().quit();
 
-            WebDriver driver=
-            driver=null;
+            WebDriver driver =
+                    driver = null;
 
             threadDriver.set(driver);
         }
     }
 
+    public static boolean isRunningOnJenkins() {
+        String jenkinsHome = System.getenv("JENKINS_HOME");
+        return jenkinsHome != null && !jenkinsHome.isEmpty();
+    }
 
 }

@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -35,8 +36,9 @@ public class GWD {
                 case "firefox": threadDriver.set(new FirefoxDriver()); break;
                 case "edge":    threadDriver.set(new EdgeDriver());    break;
                 default :  threadDriver.set(new FirefoxDriver());
-                    options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400");
-                    threadDriver.set(new ChromeDriver(options)); // ilgili threade bir driver set ettim
+                    FirefoxOptions options1=new FirefoxOptions();
+                    options1.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400");
+                    threadDriver.set(new ChromeDriver(options));
 
             }
         }

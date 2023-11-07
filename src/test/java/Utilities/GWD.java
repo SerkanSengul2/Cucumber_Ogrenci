@@ -33,22 +33,19 @@ public class GWD {
         if (threadDriver.get() == null) {
 
             switch (threadBrowserName.get()) {
-                case "firefox":
-                    threadDriver.set(new FirefoxDriver());
-                    break;
-                case "edge":
-                    threadDriver.set(new EdgeDriver());
-                    break;
+                case "firefox": threadDriver.set(new FirefoxDriver());break;
+                case "edge": threadDriver.set(new EdgeDriver());break;
                 default:
-                    threadDriver.set(new FirefoxDriver());
+
                     if (isRunningOnJenkins()) {
-
-
                         FirefoxOptions options1 = new FirefoxOptions();
                         options1.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400");
                         threadDriver.set(new FirefoxDriver(options1));
-                    } else
+                    }
+                    else {
                         threadDriver.set(new ChromeDriver());
+                    }
+
             }
 
         }

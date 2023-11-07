@@ -21,7 +21,7 @@ public class Hooks {
     @After
     public void After(Scenario senaryo) {
 
-        ExcelUtility.writeToExcel("src/test/java/ApachePOI/resource/SenaryoSonuclari3.xlsx",senaryo);
+     //   ExcelUtility.writeToExcel("src/test/java/ApachePOI/resource/SenaryoSonuclari3.xlsx",senaryo);
 //        if (senaryo.isFailed()) {
 //
 //            TakesScreenshot ts = ((TakesScreenshot) GWD.getDriver());

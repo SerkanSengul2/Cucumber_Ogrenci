@@ -38,7 +38,7 @@ public class GWD {
                 default :  threadDriver.set(new FirefoxDriver());
                     FirefoxOptions options1=new FirefoxOptions();
                     options1.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400");
-                    threadDriver.set(new ChromeDriver(options));
+                    threadDriver.set(new FirefoxDriver(options1));
 
             }
         }

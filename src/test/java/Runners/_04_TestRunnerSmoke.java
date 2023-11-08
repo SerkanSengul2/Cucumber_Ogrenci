@@ -8,7 +8,7 @@ import io.cucumber.testng.CucumberOptions;
         features = {"src/test/java/FeatureFiles"},
 
         glue = {"StepDefinitions"}
-        ,plugin= {"json:target/cucumber/cucumber.json"} // Jenkins için JSON report
+        ,plugin= {"json:target/cucumber/cucumber.json"}
 )
 public class _04_TestRunnerSmoke extends AbstractTestNGCucumberTests{
 }
